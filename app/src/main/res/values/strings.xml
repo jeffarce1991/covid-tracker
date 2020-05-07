@@ -1,7 +1,4 @@
-<!DOCTYPE resources [
-    <!ENTITY app_name "Covid Tracker">
-    <!ENTITY db_name "covid-tracker-database.sql">
-    ]>
+<!DOCTYPE resources [<!ENTITY app_name "Covid Tracker"><!ENTITY db_name "covid-tracker-database.sql">]>
 <resources>
     <string name="db_name">&db_name;</string>
     <string name="app_name">&app_name;</string>
