@@ -1,4 +1,4 @@
-package com.jeff.covidtracker.main.presenter
+package com.jeff.covidtracker.main.list.presenter
 
 import dagger.Binds
 import dagger.Module
