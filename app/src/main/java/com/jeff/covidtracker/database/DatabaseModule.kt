@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.database.room.AppDatabase
+import com.jeff.covidtracker.database.room.dao.CountryDao
 import com.jeff.covidtracker.database.room.dao.PhotoDao
 import com.jeff.covidtracker.database.usecase.local.LocalUseCaseModule
 import dagger.Module
@@ -25,7 +26,13 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideAssignmentDao(appDatabase: AppDatabase): PhotoDao {
+    fun providePhotoDao(appDatabase: AppDatabase): PhotoDao {
         return appDatabase.photoDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providCountryDao(appDatabase: AppDatabase): CountryDao {
+        return appDatabase.countryDao()
     }
 }
