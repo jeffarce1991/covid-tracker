@@ -17,7 +17,7 @@ constructor(private val remoteLoader: PhotoRemoteLoader,
             private val localSaver: PhotoLocalSaver,
             private val rxInternet: RxInternet): PhotoLoader{
 
-    override fun loadAll(): Single<List<Photo>> {
+    override fun loadAllFromRemote(): Single<List<Photo>> {
         return rxInternet.isConnected()
             .andThen(remoteLoader.loadAll())
             .flatMapObservable { list -> Observable.fromIterable(list) }
