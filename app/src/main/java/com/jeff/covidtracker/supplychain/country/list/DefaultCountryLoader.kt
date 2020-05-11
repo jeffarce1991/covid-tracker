@@ -1,15 +1,11 @@
-package com.jeff.covidtracker.supplychain.country
+package com.jeff.covidtracker.supplychain.country.list
 
 import com.jeff.covidtracker.database.local.Country
-import com.jeff.covidtracker.database.local.Photo
 import com.jeff.covidtracker.database.usecase.local.loader.CountryLocalLoader
 import com.jeff.covidtracker.database.usecase.local.saver.CountryLocalSaver
 import com.jeff.covidtracker.main.mapper.CountryDtoToCountryMapper
-import com.jeff.covidtracker.utilities.exception.EmptyResultException
-import com.jeff.covidtracker.webservices.internet.DefaultRxInternet
 import com.jeff.covidtracker.webservices.internet.RxInternet
 import com.jeff.covidtracker.webservices.usecase.loader.CountryRemoteLoader
-import com.jeff.covidtracker.webservices.usecase.loader.DefaultCountryRemoteLoader
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber

@@ -1,4 +1,4 @@
-package com.jeff.covidtracker.supplychain.country
+package com.jeff.covidtracker.supplychain.country.list
 
 import com.jeff.covidtracker.database.local.Country
 import io.reactivex.Single

@@ -9,7 +9,7 @@ import com.jeff.covidtracker.database.usecase.local.saver.PhotoLocalSaver
 import com.jeff.covidtracker.webservices.exception.NoInternetException
 import com.jeff.covidtracker.webservices.internet.RxInternet
 import com.jeff.covidtracker.main.list.view.MainView
-import com.jeff.covidtracker.supplychain.country.CountryLoader
+import com.jeff.covidtracker.supplychain.country.list.CountryLoader
 import com.jeff.covidtracker.supplychain.photo.PhotoLoader
 import com.jeff.covidtracker.webservices.dto.PhotoDto
 import com.jeff.covidtracker.webservices.api.photos.PhotosApi
@@ -26,8 +26,6 @@ import javax.inject.Inject
 class DefaultMainPresenter @Inject
 constructor(
     private val internet: RxInternet,
-    private val localLoader: PhotoLocalLoader,
-    private val localSaver: PhotoLocalSaver,
     private val schedulerUtils: RxSchedulerUtils,
     private val loader: PhotoLoader,
     private val countryLoader: CountryLoader
