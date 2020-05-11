@@ -4,7 +4,7 @@ import android.app.Application
 import com.jeff.covidtracker.database.DatabaseModule
 import com.jeff.covidtracker.webservices.internet.RxInternetModule
 import com.jeff.covidtracker.main.MainModule
-import com.jeff.covidtracker.supplychain.photo.PhotoUseCaseModule
+import com.jeff.covidtracker.supplychain.SupplyChainModule
 import com.jeff.covidtracker.utilities.UtilityModule
 import com.jeff.covidtracker.webservices.api.ApiModule
 import com.jeff.covidtracker.webservices.usecase.WebServiceUseCaseModule
@@ -22,7 +22,7 @@ import javax.inject.Singleton
     DatabaseModule::class,
     ApiModule::class,
     WebServiceUseCaseModule::class,
-    PhotoUseCaseModule::class])
+    SupplyChainModule::class])
 @Singleton
 interface AppComponent {
 

@@ -1,7 +1,6 @@
 package com.jeff.covidtracker.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -14,7 +13,6 @@ import com.jeff.covidtracker.adapter.CountryListAdapter.CountryListViewHolder
 import com.jeff.covidtracker.database.local.Country
 import com.jeff.covidtracker.databinding.CountryListRowBinding
 import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
-import com.jeff.covidtracker.main.list.view.MainActivity
 import timber.log.Timber
 
 
@@ -42,8 +40,10 @@ internal class CountryListAdapter(
         holder.menu.setOnClickListener {
             Timber.d("==q ${dataList[position].iso2}")
 
-            val intent = Intent(context.applicationContext, CountryDetailActivity::class.java)
+            val intent = CountryDetailActivity
+                .getStartIntent(context, dataList[position].slug)
             context.startActivity(intent)
+
         }
     }
 
