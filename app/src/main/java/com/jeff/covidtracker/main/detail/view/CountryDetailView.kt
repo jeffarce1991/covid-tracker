@@ -1,4 +1,11 @@
 package com.jeff.covidtracker.main.detail.view
 
-interface CountryDetailView {
+import com.hannesdorfmann.mosby.mvp.MvpView
+import com.jeff.covidtracker.database.local.Cases
+
+interface CountryDetailView: MvpView {
+
+    fun setCases(cases: Cases)
+    fun showProgress()
+    fun hideProgress()
 }

@@ -12,5 +12,131 @@
         android:layout_height="match_parent"
         tools:context=".main.detail.view.CountryDetailActivity">
 
+        <!--<androidx.appcompat.widget.Toolbar
+            android:id="@+id/country_detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ToolbarStyle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextColor="@color/white"/>-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/country_confirmed_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/country_confirmed_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/screen_margin"
+                android:text="CONFIRMED"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/country_confirmed_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/screen_margin"
+                android:text="0"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/country_deaths_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/country_confirmed_layout"
+            app:layout_constraintLeft_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/country_deaths_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEATHS"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/country_deaths_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:text="0"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/country_recovered_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/country_deaths_layout"
+            app:layout_constraintLeft_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/country_recovered_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RECOVERED"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/country_recovered_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:text="0"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/country_active_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/country_recovered_layout"
+            app:layout_constraintLeft_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/country_active_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACTIVE"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/country_active_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:textStyle="bold"
+                android:text="0"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

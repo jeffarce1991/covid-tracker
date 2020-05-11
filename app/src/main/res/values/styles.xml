@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="ToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="navigationIcon">@drawable/ic_arrow_back_white_24dp</item>
+    </style>
+
 </resources>

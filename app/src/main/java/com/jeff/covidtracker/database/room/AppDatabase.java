@@ -4,6 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
+import com.jeff.covidtracker.database.local.Cases;
 import com.jeff.covidtracker.database.local.Country;
 import com.jeff.covidtracker.database.local.Photo;
 import com.jeff.covidtracker.database.room.converter.CountryConverter;
@@ -14,9 +15,10 @@ import com.jeff.covidtracker.database.room.dao.PhotoDao;
 @Database(
         entities = {
                 Photo.class,
-                Country.class
+                Country.class,
+                Cases.class
         },
-        version = 4,
+        version = 6,
         exportSchema = false
 )
 
