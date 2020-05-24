@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         tools:context=".main.detail.view.CountryDetailActivity">
 
-        <!--<androidx.appcompat.widget.Toolbar
+
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/country_detail_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,14 +22,35 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:titleTextColor="@color/white"/>-->
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"/>
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/country_date_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/country_detail_toolbar"
+            app:layout_constraintLeft_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/country_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/screen_margin_xs"
+                android:paddingStart="@dimen/screen_margin"
+                android:paddingEnd="@dimen/screen_margin"
+                android:alpha=".5"
+                android:text="As of .."
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/country_confirmed_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/country_date_layout"
             app:layout_constraintLeft_toRightOf="parent">
 
             <TextView
@@ -36,16 +58,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/screen_margin"
-                android:text="CONFIRMED"
+                android:text="Confirmed"
+                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/country_confirmed_count"
+                android:id="@+id/country_confirmed_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/screen_margin"
-                android:text="0"
+                app:layout_constraintLeft_toRightOf="@id/country_confirmed_label"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/country_confirmed_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/screen_margin"
+                android:text="-"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,18 +93,28 @@
                 android:id="@+id/country_deaths_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEATHS"
+                android:text="Deaths"
+                android:textStyle="bold"
                 android:padding="@dimen/screen_margin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/country_deaths_count"
+                android:id="@+id/country_deaths_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
                 android:textStyle="bold"
-                android:text="0"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintLeft_toRightOf="@id/country_deaths_label"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/country_deaths_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:text="-"
                 android:padding="@dimen/screen_margin"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -91,18 +132,27 @@
                 android:id="@+id/country_recovered_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RECOVERED"
+                android:text="Recovered"
+                android:textStyle="bold"
                 android:padding="@dimen/screen_margin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/country_recovered_count"
+                android:id="@+id/country_recovered_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/green"
                 android:textStyle="bold"
-                android:text="0"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintLeft_toRightOf="@id/country_recovered_label"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/country_recovered_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:text="-"
                 android:padding="@dimen/screen_margin"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -120,18 +170,27 @@
                 android:id="@+id/country_active_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ACTIVE"
+                android:text="Active"
+                android:textStyle="bold"
                 android:padding="@dimen/screen_margin"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
-                android:id="@+id/country_active_count"
+                android:id="@+id/country_active_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
                 android:textStyle="bold"
-                android:text="0"
+                android:padding="@dimen/screen_margin"
+                app:layout_constraintLeft_toRightOf="@id/country_active_label"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/country_active_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blue"
+                android:text="-"
                 android:padding="@dimen/screen_margin"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>

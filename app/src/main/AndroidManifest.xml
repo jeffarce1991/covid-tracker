@@ -13,10 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.detail.view.CountryDetailActivity"></activity>
+        <activity android:name=".main.detail.view.CountryDetailActivity" />
         <activity
-            android:name=".main.list.view.MainActivity"
-            android:screenOrientation="fullSensor">
+            android:name=".main.list.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

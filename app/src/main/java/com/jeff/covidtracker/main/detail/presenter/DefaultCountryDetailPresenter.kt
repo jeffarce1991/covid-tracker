@@ -30,6 +30,29 @@ constructor(
             .subscribe(object : SingleObserver<Cases>{
                 override fun onSuccess(t: Cases) {
                     Timber.d("==q ${t.country} : ${t.confirmed}")
+                    //view!!.setCases(t)
+                    view!!.hideProgress()
+                    dispose()
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                    view!!.showProgress()
+                }
+
+                override fun onError(e: Throwable) {
+                    view!!.hideProgress()
+                    dispose()
+                }
+            })
+    }
+
+    override fun loadAllCases(slug: String) {
+        casesLoader.loadAll(slug)
+            .compose(schedulers.forSingle())
+            .subscribe(object : SingleObserver<List<Cases>>{
+                override fun onSuccess(t: List<Cases>) {
+                    Timber.d("==q ${t.size}")
                     view!!.setCases(t)
                     view!!.hideProgress()
                     dispose()

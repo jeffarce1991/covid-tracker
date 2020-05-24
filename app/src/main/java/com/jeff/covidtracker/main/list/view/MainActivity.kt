@@ -14,6 +14,7 @@ import com.jeff.covidtracker.android.base.extension.longToast
 import com.jeff.covidtracker.database.local.Country
 import com.jeff.covidtracker.database.local.Photo
 import com.jeff.covidtracker.databinding.ActivityMainBinding
+import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
 import com.jeff.covidtracker.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
 import java.util.*
@@ -41,8 +42,14 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        setUpToolbarTitle()
         mainPresenter.getCountries()
+    }
+
+    private fun setUpToolbarTitle() {
+        setSupportActionBar(mainBinding.toolbar)
+
+        supportActionBar!!.title = "Select Country"
     }
 
     private fun onSelectCountry(country: Country) {

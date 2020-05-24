@@ -36,14 +36,15 @@ internal class CountryListAdapter(
     }
 
     override fun onBindViewHolder(holder: CountryListViewHolder, position: Int) {
-        holder.txtTitle.text = "${dataList[position].country}, ${dataList[position].iso2}"
-        holder.menu.setOnClickListener {
-            Timber.d("==q ${dataList[position].iso2}")
-
-            val intent = CountryDetailActivity
-                .getStartIntent(context, dataList[position].slug)
-            context.startActivity(intent)
-
+            holder.txtTitle.text = "${dataList[position].country}, ${dataList[position].iso2}"
+            holder.menu.setOnClickListener {
+                Timber.d("==q ${dataList[position].iso2}")
+                val selectedCountry = dataList[position]
+                val intent = CountryDetailActivity.getStartIntent(context,
+                    selectedCountry.country,
+                    selectedCountry.slug,
+                    selectedCountry.iso2)
+                context.startActivity(intent)
         }
     }
 
