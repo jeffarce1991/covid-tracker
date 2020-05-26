@@ -18,7 +18,7 @@ import timber.log.Timber
 
 internal class CountryListAdapter(
     private val context: Context,
-    private val dataList: List<Country>
+    private var dataList: List<Country>
 ) : RecyclerView.Adapter<CountryListViewHolder>() {
     
     internal inner class CountryListViewHolder(binding: CountryListRowBinding) :
@@ -46,6 +46,13 @@ internal class CountryListAdapter(
                     selectedCountry.iso2)
                 context.startActivity(intent)
         }
+    }
+    //This method will filter the list
+    //here we are passing the filtered data
+    //and assigning it to the list with notifydatasetchanged method
+    fun update(countries: List<Country>) {
+        this.dataList = countries
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
