@@ -5,33 +5,29 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = Cases.TABLE_NAME)
-data class Cases constructor(
+data class Cases (
 
     @PrimaryKey
     @ColumnInfo(name = "country_code")
     var countryCode: String,
     @ColumnInfo(name = "country_name")
     var country: String,
-    @ColumnInfo(name = "province")
-    var province: String,
-    @ColumnInfo(name = "city")
-    var city: String,
-    @ColumnInfo(name = "city_code")
-    var cityCode: String,
-    @ColumnInfo(name = "lat")
-    var lat: String,
-    @ColumnInfo(name = "lon")
-    var lon: String,
-    @ColumnInfo(name = "confirmed")
-    var confirmed: String,
-    @ColumnInfo(name = "deaths")
-    var deaths: String,
-    @ColumnInfo(name = "recovered")
-    var recovered: String,
-    @ColumnInfo(name = "active")
-    var active: String,
     @ColumnInfo(name = "date")
-    var date: String) {
+    var date: String,
+    @ColumnInfo(name = "country_details")
+    var details: CountryDetails? = null,
+    @ColumnInfo(name = "new_cases")
+    var newCases: NewCases? = null,
+    @ColumnInfo(name = "total_cases")
+    var totalCases: TotalCases? = null
+) {
+
+    data class CountryDetails(
+        var province: String? = null,
+        var city: String? = null,
+        var cityCode: String? = null,
+        var lat: String? = null,
+        var lon: String? = null)
 
     companion object {
 

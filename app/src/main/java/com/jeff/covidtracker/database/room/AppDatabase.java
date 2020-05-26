@@ -7,6 +7,7 @@ import androidx.room.TypeConverters;
 import com.jeff.covidtracker.database.local.Cases;
 import com.jeff.covidtracker.database.local.Country;
 import com.jeff.covidtracker.database.local.Photo;
+import com.jeff.covidtracker.database.room.converter.CasesConverter;
 import com.jeff.covidtracker.database.room.converter.CountryConverter;
 import com.jeff.covidtracker.database.room.converter.PhotoConverter;
 import com.jeff.covidtracker.database.room.dao.CountryDao;
@@ -18,14 +19,15 @@ import com.jeff.covidtracker.database.room.dao.PhotoDao;
                 Country.class,
                 Cases.class
         },
-        version = 6,
+        version = 9,
         exportSchema = false
 )
 
 @TypeConverters(
         {
                 PhotoConverter.class,
-                CountryConverter.class
+                CountryConverter.class,
+                CasesConverter.class
         })
 public abstract class AppDatabase extends RoomDatabase {
         public abstract PhotoDao photoDao();
