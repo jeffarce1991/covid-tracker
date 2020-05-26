@@ -4,6 +4,8 @@ import com.jeff.covidtracker.supplychain.country.detail.CasesLoader
 import com.jeff.covidtracker.supplychain.country.detail.DefaultCasesLoader
 import com.jeff.covidtracker.supplychain.country.list.CountryLoader
 import com.jeff.covidtracker.supplychain.country.list.DefaultCountryLoader
+import com.jeff.covidtracker.supplychain.country.list.DefaultSummaryLoader
+import com.jeff.covidtracker.supplychain.country.list.SummaryLoader
 import com.jeff.covidtracker.supplychain.photo.DefaultPhotoLoader
 import com.jeff.covidtracker.supplychain.photo.PhotoLoader
 import dagger.Binds
@@ -20,4 +22,8 @@ abstract class SupplyChainModule {
 
     @Binds
     abstract fun bindCasesLoader(defaultCasesLoader: DefaultCasesLoader): CasesLoader
+
+    @Binds
+    abstract fun bindSummaryLoader(defaultSummaryLoader: DefaultSummaryLoader): SummaryLoader
+
 }
