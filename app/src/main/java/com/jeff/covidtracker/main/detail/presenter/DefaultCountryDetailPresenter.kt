@@ -29,7 +29,7 @@ constructor(
             .compose(schedulers.forSingle())
             .subscribe(object : SingleObserver<Cases>{
                 override fun onSuccess(t: Cases) {
-                    Timber.d("==q ${t.country} : ${t.confirmed}")
+                    Timber.d("==q ${t.country} : ${t.totalCases!!.totalConfirmed}")
                     //view!!.setCases(t)
                     view!!.hideProgress()
                     dispose()

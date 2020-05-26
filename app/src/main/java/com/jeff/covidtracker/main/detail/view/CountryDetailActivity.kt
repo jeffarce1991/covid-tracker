@@ -26,7 +26,7 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
     lateinit var binding : ActivityCountryDetailBinding
 
     companion object {
-        private var EXTRA_COUNTRY_COUNTRY = "EXTRA_COUNTRY_COUNTRY"
+        private var EXTRA_COUNTRY_NAME = "EXTRA_COUNTRY_NAME"
         private var EXTRA_COUNTRY_SLUG = "EXTRA_COUNTRY_SLUG"
         private var EXTRA_COUNTRY_ISO2 = "EXTRA_COUNTRY_ISO2"
 
@@ -37,7 +37,7 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
             iso2 : String
         ): Intent {
             return Intent(context, CountryDetailActivity::class.java)
-                .putExtra(EXTRA_COUNTRY_COUNTRY, country)
+                .putExtra(EXTRA_COUNTRY_NAME, country)
                 .putExtra(EXTRA_COUNTRY_SLUG, slug)
                 .putExtra(EXTRA_COUNTRY_ISO2, iso2)
         }
@@ -60,7 +60,7 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
     private fun setUpToolbarTitle() {
         setSupportActionBar(binding.countryDetailToolbar)
 
-        supportActionBar!!.title = intent.getStringExtra(EXTRA_COUNTRY_SLUG).capitalize()
+        supportActionBar!!.title = intent.getStringExtra(EXTRA_COUNTRY_NAME).capitalize()
         binding.countryDetailToolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
@@ -72,21 +72,25 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
         val yesterday = cases[cases.lastIndex - 1]
         val total = cases.last()
         binding.countryDate.text = String.format("As of ${total.date.toDisplay("MMM dd, yyyy")}")
-        binding.countryConfirmedTotal.text = total.confirmed
-        binding.countryConfirmedToday.text = get(total.confirmed, yesterday.confirmed)
+        binding.countryConfirmedTotal.text = total.totalCases!!.totalConfirmed.toString()
+        binding.countryConfirmedToday.text = get(total.totalCases!!.totalConfirmed,
+                                                 yesterday.totalCases!!.totalConfirmed)
 
-        binding.countryDeathsTotal.text = total.deaths
-        binding.countryDeathsToday.text = get(total.deaths, yesterday.deaths)
+        binding.countryDeathsTotal.text = total.totalCases!!.totalDeaths.toString()
+        binding.countryDeathsToday.text = get(total.totalCases!!.totalDeaths,
+                                              yesterday.totalCases!!.totalDeaths)
 
-        binding.countryRecoveredTotal.text = total.recovered
-        binding.countryRecoveredToday.text = get(total.recovered, yesterday.recovered)
+        binding.countryRecoveredTotal.text = total.totalCases!!.totalRecovered.toString()
+        binding.countryRecoveredToday.text = get(total.totalCases!!.totalRecovered,
+                                                 yesterday.totalCases!!.totalRecovered)
 
-        binding.countryActiveTotal.text = total.active
-        binding.countryActiveToday.text = get(total.active, yesterday.active)
+        binding.countryActiveTotal.text = total.totalCases!!.totalActive.toString()
+        binding.countryActiveToday.text = get(total.totalCases!!.totalActive,
+                                              yesterday.totalCases!!.totalActive)
     }
 
-    fun get(x: String, y: String): String{
-        return String.format("+${(x.toInt() - y.toInt())}")
+    fun get(x: Int?, y: Int?): String{
+        return String.format("+${(x!! - y!!)}")
     }
 
 
