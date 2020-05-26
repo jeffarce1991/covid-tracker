@@ -1,8 +1,7 @@
 package com.jeff.covidtracker.main.list.view
 
 import com.hannesdorfmann.mosby.mvp.MvpView
-import com.jeff.covidtracker.database.local.Country
-import com.jeff.covidtracker.database.local.Photo
+import com.jeff.covidtracker.database.local.Cases
 
 interface MainView : MvpView {
      fun hideProgress()
@@ -11,6 +10,5 @@ interface MainView : MvpView {
 
      fun showLoadingDataFailed()
      fun showToast(message: String)
-     fun generateDataList(photos: List<Photo>)
-     fun generateCountryList(countries: List<Country>)
+     fun generateDataList(cases: List<Cases>)
 }
