@@ -21,4 +21,9 @@ interface WebServiceUseCaseModule {
     fun bindCasesRemoteLoader(
             defaultCasesRemoteLoader: DefaultCasesRemoteLoader
     ): CasesRemoteLoader
+
+    @Binds
+    fun bindSummaryRemoteLoader(
+            defaultSummaryRemoteLoader: DefaultSummaryRemoteLoader
+    ): SummaryRemoteLoader
 }
