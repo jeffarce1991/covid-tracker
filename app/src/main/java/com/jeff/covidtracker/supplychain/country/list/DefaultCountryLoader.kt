@@ -34,7 +34,7 @@ constructor(
 
     override fun loadAllFromRemote(): Single<List<Country>> {
         return internet.isConnected()
-            .andThen(remoteLoader.loadAll())
+            .andThen(remoteLoader.loadCountries())
             .flatMapObservable { list -> Observable.fromIterable(list) }
             .flatMap(CountryDtoToCountryMapper())
             .toList()
@@ -54,8 +54,7 @@ constructor(
                     else -> Single.just(it)
                 }
             }*/
-            .flatMap { photos -> Single.just(photos)}
+            .flatMap { countries -> Single.just(countries)}
     }
-
 
 }
