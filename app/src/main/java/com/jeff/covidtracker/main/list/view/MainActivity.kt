@@ -122,6 +122,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
         /*invokeSimpleDialog("Project420",
             "OK",
             "List is empty or null.")*/
+        //TEST COMMIT
     }
 
     override fun showToast(message: String) {
