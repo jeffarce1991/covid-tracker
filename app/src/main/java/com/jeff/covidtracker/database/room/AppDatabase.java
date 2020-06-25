@@ -10,6 +10,7 @@ import com.jeff.covidtracker.database.local.Photo;
 import com.jeff.covidtracker.database.room.converter.CasesConverter;
 import com.jeff.covidtracker.database.room.converter.CountryConverter;
 import com.jeff.covidtracker.database.room.converter.PhotoConverter;
+import com.jeff.covidtracker.database.room.dao.CasesDao;
 import com.jeff.covidtracker.database.room.dao.CountryDao;
 import com.jeff.covidtracker.database.room.dao.PhotoDao;
 
@@ -32,4 +33,5 @@ import com.jeff.covidtracker.database.room.dao.PhotoDao;
 public abstract class AppDatabase extends RoomDatabase {
         public abstract PhotoDao photoDao();
         public abstract CountryDao countryDao();
+        public abstract CasesDao casesDao();
 }

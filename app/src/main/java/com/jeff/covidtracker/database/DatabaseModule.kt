@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.database.room.AppDatabase
+import com.jeff.covidtracker.database.room.dao.CasesDao
 import com.jeff.covidtracker.database.room.dao.CountryDao
 import com.jeff.covidtracker.database.room.dao.PhotoDao
 import com.jeff.covidtracker.database.usecase.local.LocalUseCaseModule
@@ -34,5 +35,11 @@ class DatabaseModule {
     @Singleton
     fun providCountryDao(appDatabase: AppDatabase): CountryDao {
         return appDatabase.countryDao()
+    }
+
+    @Provides
+    @Singleton
+    fun providCasesDao(appDatabase: AppDatabase): CasesDao {
+        return appDatabase.casesDao()
     }
 }
