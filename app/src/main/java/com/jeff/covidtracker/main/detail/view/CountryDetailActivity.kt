@@ -68,32 +68,25 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
         return countryDetailPresenter
     }
 
-    override fun setCases(cases: List<Cases>) {
-        val yesterday = cases[cases.lastIndex - 1]
-        val total = cases.last()
-        binding.countryDate.text = String.format("As of ${total.date.toDisplay("MMM dd, yyyy")}")
-        binding.countryConfirmedTotal.text = total.totalCases!!.totalConfirmed.toString()
-        binding.countryConfirmedToday.text = get(total.totalCases!!.totalConfirmed,
-                                                 yesterday.totalCases!!.totalConfirmed)
+    override fun setCases(cases: Cases) {
+        binding.countryDate.text = String.format("As of ${cases.date.toDisplay("MMM dd, yyyy")}")
+        binding.countryConfirmedTotal.text = cases.totalCases!!.totalConfirmed.toString()
+        binding.countryConfirmedToday.text = get(cases.newCases!!.newConfirmed)
 
-        binding.countryDeathsTotal.text = total.totalCases!!.totalDeaths.toString()
-        binding.countryDeathsToday.text = get(total.totalCases!!.totalDeaths,
-                                              yesterday.totalCases!!.totalDeaths)
+        binding.countryDeathsTotal.text = cases.totalCases!!.totalDeaths.toString()
+        binding.countryDeathsToday.text = get(cases.newCases!!.newDeaths)
 
-        binding.countryRecoveredTotal.text = total.totalCases!!.totalRecovered.toString()
-        binding.countryRecoveredToday.text = get(total.totalCases!!.totalRecovered,
-                                                 yesterday.totalCases!!.totalRecovered)
-
-        binding.countryActiveTotal.text = total.totalCases!!.totalActive.toString()
-        binding.countryActiveToday.text = get(total.totalCases!!.totalActive,
-                                              yesterday.totalCases!!.totalActive)
+        binding.countryRecoveredTotal.text = cases.totalCases!!.totalRecovered.toString()
+        binding.countryRecoveredToday.text = get(cases.newCases!!.newRecovered)
     }
 
     fun get(x: Int?, y: Int?): String{
         return String.format("+${(x!! - y!!)}")
     }
 
-
+    fun get(x: Int?): String{
+        return String.format("+${x!!}")
+    }
 
     override fun hideProgress() {
         progressDialog.dismiss()

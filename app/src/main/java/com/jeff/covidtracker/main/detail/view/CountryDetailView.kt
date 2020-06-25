@@ -5,7 +5,7 @@ import com.jeff.covidtracker.database.local.Cases
 
 interface CountryDetailView: MvpView {
 
-    fun setCases(cases: List<Cases>)
+    fun setCases(cases: Cases)
     fun showProgress()
     fun hideProgress()
 }
