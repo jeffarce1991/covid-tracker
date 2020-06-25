@@ -1,28 +1,25 @@
 package com.jeff.covidtracker.database.room.dao
 
 import androidx.room.*
+import com.jeff.covidtracker.database.local.Cases
 import com.jeff.covidtracker.database.local.Photo
 
 @Dao
-interface PhotoDao {
-    @Query("Select * FROM " + Photo.TABLE_NAME)
-    fun loadAll(): List<Photo>
+interface CasesDao {
+    @Query("Select * FROM " + Cases.TABLE_NAME)
+    fun loadAll(): List<Cases>
 
-    @Query("Select * FROM " + Photo.TABLE_NAME +
-            " WHERE "+ Photo.COLUMN_ID +" IN (:id)")
-    fun loadAllByIds(id: IntArray): List<Photo>
-
-    @Query("SELECT * FROM " + Photo.TABLE_NAME +
-            " WHERE title LIKE :title AND title LIMIT 1")
-    fun findByTitle(title: String): Photo
+    @Query("SELECT * FROM " + Cases.TABLE_NAME +
+            " WHERE " + Cases.COUNTRY_CODE +" LIKE :countryCode")
+    fun loadByCountryCOde(countryCode: String): Cases
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(photos: List<Photo>)
+    fun insert(cases: List<Cases>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(photo: Photo)
+    fun insert(cases: Cases)
 
     @Delete
-    fun delete(photo: Photo)
+    fun delete(cases: Cases)
 
 }
