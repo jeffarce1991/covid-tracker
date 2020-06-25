@@ -1,12 +1,13 @@
 package com.jeff.covidtracker.database.usecase.local.saver
 
+import com.jeff.covidtracker.database.local.Cases
 import com.jeff.covidtracker.database.local.Photo
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-interface PhotoLocalSaver {
+interface CasesLocalSaver {
 
-    fun save(photo: Photo): Completable
+    fun save(cases: Cases): Completable
 
-    fun saveAll(photos: List<Photo>): Observable<List<Photo>>
+    fun saveAll(casesList: List<Cases>): Observable<List<Cases>>
 }
