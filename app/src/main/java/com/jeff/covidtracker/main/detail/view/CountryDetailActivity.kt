@@ -27,18 +27,18 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
 
     companion object {
         private var EXTRA_COUNTRY_NAME = "EXTRA_COUNTRY_NAME"
-        private var EXTRA_COUNTRY_SLUG = "EXTRA_COUNTRY_SLUG"
+        private var EXTRA_COUNTRY_CODE = "EXTRA_COUNTRY_CODE"
         private var EXTRA_COUNTRY_ISO2 = "EXTRA_COUNTRY_ISO2"
 
         fun getStartIntent(
             context: Context,
             country : String,
-            slug : String,
+            countryCode : String,
             iso2 : String
         ): Intent {
             return Intent(context, CountryDetailActivity::class.java)
                 .putExtra(EXTRA_COUNTRY_NAME, country)
-                .putExtra(EXTRA_COUNTRY_SLUG, slug)
+                .putExtra(EXTRA_COUNTRY_CODE, countryCode)
                 .putExtra(EXTRA_COUNTRY_ISO2, iso2)
         }
     }
@@ -52,7 +52,7 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
         binding = DataBindingUtil.setContentView(this, R.layout.activity_country_detail)
 
         setUpToolbarTitle()
-        countryDetailPresenter.loadAllCases(intent.getStringExtra(EXTRA_COUNTRY_SLUG))
+        countryDetailPresenter.loadCases(intent.getStringExtra(EXTRA_COUNTRY_CODE))
 
 
     }
