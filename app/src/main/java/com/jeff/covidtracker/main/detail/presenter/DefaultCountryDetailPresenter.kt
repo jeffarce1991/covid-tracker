@@ -23,36 +23,12 @@ constructor(
 
     lateinit var disposable: Disposable
 
-
-    override fun loadLatestCases(slug: String) {
-        casesLoader.loadLast(slug)
+    override fun loadCases(countryCode: String) {
+        casesLoader.loadByCountryCode(countryCode)
             .compose(schedulers.forSingle())
             .subscribe(object : SingleObserver<Cases>{
                 override fun onSuccess(t: Cases) {
-                    Timber.d("==q ${t.country} : ${t.totalCases!!.totalConfirmed}")
-                    //view!!.setCases(t)
-                    view!!.hideProgress()
-                    dispose()
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                    disposable = d
-                    view!!.showProgress()
-                }
-
-                override fun onError(e: Throwable) {
-                    view!!.hideProgress()
-                    dispose()
-                }
-            })
-    }
-
-    override fun loadAllCases(slug: String) {
-        casesLoader.loadAll(slug)
-            .compose(schedulers.forSingle())
-            .subscribe(object : SingleObserver<List<Cases>>{
-                override fun onSuccess(t: List<Cases>) {
-                    Timber.d("==q ${t.size}")
+                    Timber.d("==q countryCode $t")
                     view!!.setCases(t)
                     view!!.hideProgress()
                     dispose()
@@ -61,10 +37,13 @@ constructor(
                 override fun onSubscribe(d: Disposable) {
                     disposable = d
                     view!!.showProgress()
+                    Timber.d("==q onSubscribe countryCode")
                 }
 
                 override fun onError(e: Throwable) {
                     view!!.hideProgress()
+                    Timber.e(e)
+                    e.printStackTrace()
                     dispose()
                 }
             })

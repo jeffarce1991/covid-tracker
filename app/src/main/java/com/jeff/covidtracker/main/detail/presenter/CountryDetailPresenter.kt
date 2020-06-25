@@ -6,6 +6,5 @@ import com.jeff.covidtracker.main.detail.view.CountryDetailView
 import io.reactivex.Single
 
 interface CountryDetailPresenter : MvpPresenter<CountryDetailView>{
-    fun loadLatestCases(slug: String)
-    fun loadAllCases(slug: String)
+    fun loadCases(countryCode: String)
 }
