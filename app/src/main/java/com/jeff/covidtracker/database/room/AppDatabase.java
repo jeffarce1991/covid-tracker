@@ -20,7 +20,7 @@ import com.jeff.covidtracker.database.room.dao.PhotoDao;
                 Country.class,
                 Cases.class
         },
-        version = 9,
+        version = 10,
         exportSchema = false
 )
 
