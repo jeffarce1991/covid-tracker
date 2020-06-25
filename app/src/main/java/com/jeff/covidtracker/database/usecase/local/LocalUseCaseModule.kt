@@ -1,13 +1,7 @@
 package com.jeff.covidtracker.database.usecase.local
 
-import com.jeff.covidtracker.database.usecase.local.loader.CountryLocalLoader
-import com.jeff.covidtracker.database.usecase.local.loader.DefaultCountryLocalLoader
-import com.jeff.covidtracker.database.usecase.local.loader.DefaultPhotoLocalLoader
-import com.jeff.covidtracker.database.usecase.local.loader.PhotoLocalLoader
-import com.jeff.covidtracker.database.usecase.local.saver.CountryLocalSaver
-import com.jeff.covidtracker.database.usecase.local.saver.DefaultCountryLocalSaver
-import com.jeff.covidtracker.database.usecase.local.saver.DefaultPhotoLocalSaver
-import com.jeff.covidtracker.database.usecase.local.saver.PhotoLocalSaver
+import com.jeff.covidtracker.database.usecase.local.loader.*
+import com.jeff.covidtracker.database.usecase.local.saver.*
 import dagger.Binds
 import dagger.Module
 
@@ -24,5 +18,11 @@ interface LocalUseCaseModule {
 
     @Binds
     fun bindCountryLocalLoader(implementation: DefaultCountryLocalLoader): CountryLocalLoader
+
+    @Binds
+    fun bindCasesLocalSaver(implementation: DefaultCasesLocalSaver): CasesLocalSaver
+
+    @Binds
+    fun bindCasesLocalLoader(implementation: DefaultCasesLocalLoader): CasesLocalLoader
 
 }
