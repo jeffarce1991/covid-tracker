@@ -31,8 +31,7 @@ data class Cases (
 
     companion object {
 
-        const val COLUMN_DEAL_ID = "country_cases_id"
-        const val COLUMN_ID = "id"
+        const val COUNTRY_CODE = "country_code"
         const val TABLE_NAME = "country_cases"
     }
 
