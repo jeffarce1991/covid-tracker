@@ -2,6 +2,7 @@ package com.jeff.covidtracker.supplychain.country.list
 
 import com.jeff.covidtracker.database.local.Cases
 import com.jeff.covidtracker.database.usecase.local.loader.CountryLocalLoader
+import com.jeff.covidtracker.database.usecase.local.saver.CasesLocalSaver
 import com.jeff.covidtracker.database.usecase.local.saver.CountryLocalSaver
 import com.jeff.covidtracker.main.mapper.CasesDtoToCasesMapper
 import com.jeff.covidtracker.webservices.internet.RxInternet
@@ -15,8 +16,7 @@ class DefaultSummaryLoader @Inject
 constructor(
     private val internet: RxInternet,
     private val remoteLoader: SummaryRemoteLoader,
-    private val localSaver: CountryLocalSaver,
-    private val localLoader: CountryLocalLoader
+    private val localSaver: CasesLocalSaver
 ) : SummaryLoader {
 
     override fun loadCountryCases(): Single<List<Cases>> {
@@ -25,9 +25,9 @@ constructor(
             .flatMapObservable { list -> Observable.fromIterable(list.countries) }
             .flatMap(CasesDtoToCasesMapper())
             .toList()
-            //.flatMap { Single.fromObservable(localSaver.saveAll(it)) }
+            .flatMap { Single.fromObservable(localSaver.saveAll(it)) }
             .flatMap {
-                Timber.d("==q Countries loaded remotely. $it")
+                Timber.d("==q Countries loaded remotely. ${it.size}")
                 Single.just(it)
             }
     }
