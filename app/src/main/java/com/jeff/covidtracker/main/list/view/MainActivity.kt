@@ -5,13 +5,22 @@ import android.app.ProgressDialog.show
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
+import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat
+import androidx.core.view.MenuItemCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blongho.country_data.World
 import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.adapter.CountryCasesListAdapter
 import com.jeff.covidtracker.android.base.extension.longToast
+import com.jeff.covidtracker.android.base.extension.shortToast
 import com.jeff.covidtracker.database.local.Cases
 import com.jeff.covidtracker.database.local.Country
 import com.jeff.covidtracker.database.local.Photo
@@ -33,6 +42,8 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
 
     lateinit var countries : List<Country>
 
+    private lateinit var searchView: SearchView
+
 
     @Inject
     internal lateinit var mainPresenter: MainPresenter
@@ -45,8 +56,51 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setUpToolbarTitle()
         mainPresenter.loadCountryCases()
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        initializeSearchView(menu)
 
+        return true
+    }
+
+    private fun initializeSearchView(menu: Menu?) {
+        val searchItem: MenuItem = menu!!.findItem(R.id.action_search)
+        searchView =
+            MenuItemCompat.getActionView(searchItem) as SearchView
+        searchView.setOnCloseListener { true }
+
+        val searchPlate =
+            searchView.findViewById(androidx.appcompat.R.id.search_src_text) as EditText
+        searchPlate.hint = "Country, Country Code"
+        searchPlate.setHintTextColor(resources.getColor(R.color.light_gray))
+        searchPlate.setTextColor(resources.getColor(R.color.white))
+
+        val searchPlateView: View = searchView.findViewById(androidx.appcompat.R.id.search_plate)
+        searchPlateView.setBackgroundColor(
+            ContextCompat.getColor(
+                this,
+                android.R.color.transparent
+            )
+        )
+
+    }
+
+    private fun setSearchQueryListener(list: List<Cases>) {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // do your logic here
+                shortToast("Submitted $query")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filter(newText!!, list)
+                return false
+            }
+        })
     }
 
     private fun setUpToolbarTitle() {
@@ -62,28 +116,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
         mainBinding.customRecyclerView.layoutManager = layoutManager
         mainBinding.customRecyclerView.adapter = adapter
         adapter.sort()
-        addTextChangedListener(cases)
-    }
-
-    private fun addTextChangedListener(countries: List<Cases>) {
-        mainBinding.searchField
-            .addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    filter(s.toString(), countries )
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                }
-            })
+        setSearchQueryListener(cases)
     }
 
     private fun filter(text: String,
