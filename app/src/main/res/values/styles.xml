@@ -12,6 +12,11 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="windowNoTitle">true</item>
 
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="popupTheme">@style/PopupTheme</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="searchViewStyle">@style/SearchStyle</item>
     </style>
 
 
@@ -22,4 +27,22 @@
         <item name="titleTextColor">@color/white</item>
     </style>
 
+
+    <style name="SearchStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="editTextColor">#FFFFFF</item>
+        <item name="android:searchIcon">@drawable/ic_search</item>
+        <item name="android:closeIcon">@drawable/ic_close</item>
+    </style>
+
+    <style name="PopupTheme" parent="Theme.AppCompat.Light">
+
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="overlapAnchor">false</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
 </resources>
