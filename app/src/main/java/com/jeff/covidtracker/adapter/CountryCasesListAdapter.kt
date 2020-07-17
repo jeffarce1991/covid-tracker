@@ -39,6 +39,7 @@ internal class CountryCasesListAdapter(
     override fun onBindViewHolder(holder: CountryCasesListViewHolder, position: Int) {
             holder.txtTitle.text = "${dataList[position].country}, ${dataList[position].totalCases!!.totalConfirmed}"
             holder.menu.setOnClickListener {
+        holder.txtTitle.text = String.substringWithDots(cases.country, 27)
                 Timber.d("==q ${dataList[position].country}")
                 val selectedCountry = dataList[position]
                 val intent = CountryDetailActivity.getStartIntent(context,

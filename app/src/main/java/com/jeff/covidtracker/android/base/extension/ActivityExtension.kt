@@ -1,6 +1,8 @@
 package com.jeff.covidtracker.android.base.extension
 
 import android.app.Activity
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.jeff.covidtracker.R
@@ -58,3 +60,13 @@ fun Activity.shortToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
+fun String.Companion.substringWithDots(s: String, maxLength: Int) : String {
+    return when {
+        s.length >= maxLength -> {
+            String.format("${s.substring(0, maxLength)}…")
+        }
+        else -> {
+            s
+        }
+    }
+}
