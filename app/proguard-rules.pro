@@ -22,7 +22,7 @@
 
 -keep class com.jeff.covidtracker** { *; }
 -keepattributes *Annotation*, Signature, Exception
-
+-keep public class com.blongho.country_data** { *;}
 #This excludes shrinking and obfuscating parts of classes that extend
 #select classes from the Android API. The line including BroadcastReceiver
 #is especially important if your application reacts to notifications, while
