@@ -5,4 +5,5 @@
     <dimen name="screen_margin">16dp</dimen>
     <dimen name="screen_margin_small">12dp</dimen>
     <dimen name="screen_margin_xs">8dp</dimen>
+    <dimen name="screen_margin_xxs">4dp</dimen>
 </resources>

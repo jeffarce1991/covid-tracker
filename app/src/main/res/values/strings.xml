@@ -7,4 +7,8 @@
     <string name="error">Something went wrong… Please try later!</string>
     <string name="content_description">Sample Content Description</string>
     <string name="cancel">Cancel</string>
+    <string name="search">Search</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="todo">TODO…</string>
 </resources>

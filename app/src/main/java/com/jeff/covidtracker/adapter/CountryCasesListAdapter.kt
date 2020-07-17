@@ -3,15 +3,21 @@ package com.jeff.covidtracker.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.blongho.country_data.World
+import com.jakewharton.picasso.OkHttp3Downloader
 import com.jeff.covidtracker.R
+import com.jeff.covidtracker.android.base.extension.substringWithDots
 import com.jeff.covidtracker.database.local.Cases
-import com.jeff.covidtracker.databinding.CountryListRowBinding
+import com.jeff.covidtracker.databinding.ItemCountryBinding
 import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
+import com.squareup.picasso.Picasso
 import timber.log.Timber
 import java.util.*
 
@@ -21,15 +27,19 @@ internal class CountryCasesListAdapter(
     private var dataList: List<Cases>
 ) : RecyclerView.Adapter<CountryCasesListAdapter.CountryCasesListViewHolder>() {
 
-    internal inner class CountryCasesListViewHolder(binding: CountryListRowBinding) :
+
+    internal inner class CountryCasesListViewHolder(binding: ItemCountryBinding) :
         ViewHolder(binding.root) {
         var txtTitle: TextView = binding.country
-        var menu: LinearLayout = binding.menu
+        var confirmedCases: TextView = binding.confirmedCases
+        var confirmedCasesIcon: TextView = binding.confirmedCasesIcon
+        var menu: ConstraintLayout = binding.menu
+        var flag: ImageView = binding.flag
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CountryCasesListViewHolder {
-        val binding = DataBindingUtil.inflate<CountryListRowBinding>(LayoutInflater.from(p0.context),
-            R.layout.country_list_row,
+        val binding = DataBindingUtil.inflate<ItemCountryBinding>(LayoutInflater.from(p0.context),
+            R.layout.item_country,
             p0,
             false)
         sort()
@@ -37,8 +47,18 @@ internal class CountryCasesListAdapter(
     }
 
     override fun onBindViewHolder(holder: CountryCasesListViewHolder, position: Int) {
-            holder.txtTitle.text = "${dataList[position].country}, ${dataList[position].totalCases!!.totalConfirmed}"
-            holder.menu.setOnClickListener {
+        val cases = dataList[position]
+        holder.confirmedCasesIcon.text = String.format("\uD83D\uDCBC")
+        holder.confirmedCases.text = String.format("%,d", cases.totalCases!!.totalConfirmed)
+        holder.txtTitle.text = String.substringWithDots(cases.country, 27)
+        World.init(context.applicationContext)
+        val flag = World.getFlagOf(dataList[position].countryCode)
+        /*Picasso.with(context).load(flag)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_placeholder_error)
+            .into(holder.flag)*/
+        holder.flag.setImageResource(flag)
+        holder.menu.setOnClickListener {
                 Timber.d("==q ${dataList[position].country}")
                 val selectedCountry = dataList[position]
                 val intent = CountryDetailActivity.getStartIntent(context,
@@ -47,6 +67,9 @@ internal class CountryCasesListAdapter(
                     "")
                 context.startActivity(intent)
         }
+    }
+
+    fun initWorld() {
     }
 
     fun sort() {

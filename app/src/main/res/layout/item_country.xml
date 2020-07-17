@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/flag"
+            android:layout_width="68dp"
+            android:layout_height="34dp"
+            android:cropToPadding="true"
+            android:contentDescription="@string/todo"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_border"
+            android:src="@drawable/ph"
+            android:layout_margin="@dimen/screen_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Philippines"
+            android:layout_margin="@dimen/screen_margin"
+            app:layout_constraintStart_toEndOf="@id/flag"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:id="@+id/confirmedCases"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_margin_xxs"
+            android:text="1,000,000"
+            app:layout_constraintBottom_toBottomOf="@id/confirmedCasesIcon"
+            app:layout_constraintStart_toEndOf="@id/confirmedCasesIcon"/>
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:id="@+id/confirmedCasesIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\uD83D\uDCBC"
+            app:layout_constraintTop_toBottomOf="@id/country"
+            app:layout_constraintStart_toStartOf="@id/country"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/darker_gray"
+            android:layout_marginTop="@dimen/screen_margin"
+            app:layout_constraintTop_toBottomOf="@id/confirmedCasesIcon"
+            app:layout_constraintStart_toEndOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

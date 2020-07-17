@@ -12,6 +12,26 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="windowNoTitle">true</item>
 
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="popupTheme">@style/PopupTheme</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="searchViewStyle">@style/SearchStyle</item>
+
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MaterialComponents.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MaterialComponents.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MaterialComponents.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MaterialComponents.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MaterialComponents.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MaterialComponents.Body2</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MaterialComponents.Caption</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MaterialComponents.Button</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MaterialComponents.Overline</item>
+
     </style>
 
 
@@ -20,6 +40,37 @@
         <item name="android:actionMenuTextColor">@color/white</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="titleTextColor">@color/white</item>
+    </style>
+
+
+    <style name="SearchStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="editTextColor">#FFFFFF</item>
+        <item name="android:searchIcon">@drawable/ic_search</item>
+        <item name="android:closeIcon">@drawable/ic_close</item>
+    </style>
+
+    <style name="PopupTheme" parent="Theme.AppCompat.Light">
+
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="overlapAnchor">false</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="DividerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="background">@android:color/darker_gray</item>
+    </style>
+
+    <style name="ClickableStyle">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="background">?attr/selectableItemBackground</item>
     </style>
 
 </resources>
