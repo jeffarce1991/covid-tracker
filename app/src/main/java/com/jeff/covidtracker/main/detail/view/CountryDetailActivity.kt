@@ -13,6 +13,7 @@ import com.jeff.covidtracker.databinding.ActivityCountryDetailBinding
 import com.jeff.covidtracker.main.detail.presenter.DefaultCountryDetailPresenter
 import com.jeff.covidtracker.utilities.extensions.toDisplay
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.item_country.*
 import javax.inject.Inject
 
 class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetailPresenter>(),
@@ -26,9 +27,9 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
     lateinit var binding : ActivityCountryDetailBinding
 
     companion object {
-        private var EXTRA_COUNTRY_NAME = "EXTRA_COUNTRY_NAME"
-        private var EXTRA_COUNTRY_CODE = "EXTRA_COUNTRY_CODE"
-        private var EXTRA_COUNTRY_ISO2 = "EXTRA_COUNTRY_ISO2"
+        var EXTRA_COUNTRY_NAME = "EXTRA_COUNTRY_NAME"
+        var EXTRA_COUNTRY_CODE = "EXTRA_COUNTRY_CODE"
+        var EXTRA_COUNTRY_ISO2 = "EXTRA_COUNTRY_ISO2"
 
         fun getStartIntent(
             context: Context,
@@ -51,17 +52,22 @@ class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetai
         setContentView(R.layout.activity_country_detail)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_country_detail)
 
-        setUpToolbarTitle()
-        countryDetailPresenter.loadCases(intent.getStringExtra(EXTRA_COUNTRY_CODE))
-
-
+        setToolbarTitle()
+        val countryCode = intent.getStringExtra(EXTRA_COUNTRY_CODE)
+        if (countryCode != null) {
+            countryDetailPresenter.loadCases(countryCode)
+        }
     }
 
-    private fun setUpToolbarTitle() {
+
+    override fun setToolbarTitle() {
         setSupportActionBar(binding.countryDetailToolbar)
 
-        supportActionBar!!.title = intent.getStringExtra(EXTRA_COUNTRY_NAME).capitalize()
+        var countryName = intent.getStringExtra(EXTRA_COUNTRY_NAME)
+        countryName = countryName?.capitalize() ?: getString(R.string.missing_country_name)
+        supportActionBar!!.title = countryName
         binding.countryDetailToolbar.setNavigationOnClickListener { onBackPressed() }
+
     }
 
     override fun createPresenter(): DefaultCountryDetailPresenter {
