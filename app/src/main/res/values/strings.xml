@@ -11,4 +11,5 @@
     <string name="about">About</string>
     <string name="exit">Exit</string>
     <string name="todo">TODO…</string>
+    <string name="missing_country_name">Missing Country Name</string>
 </resources>
