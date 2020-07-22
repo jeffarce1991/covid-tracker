@@ -6,6 +6,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.jeff.covidtracker.R
+import java.util.*
 
 fun Activity.invokeSimpleDialog(title: String,
                                 positiveButtonText: String,
@@ -70,3 +71,7 @@ fun String.Companion.substringWithDots(s: String, maxLength: Int) : String {
         }
     }
 }
+
+
+@OptIn(ExperimentalStdlibApi::class)
+fun String.toTitleCase(): String = this.capitalize(Locale.ROOT)
