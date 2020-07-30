@@ -53,10 +53,6 @@ internal class CountryCasesListAdapter(
         holder.txtTitle.text = String.substringWithDots(cases.country, 27)
         World.init(context.applicationContext)
         val flag = World.getFlagOf(dataList[position].countryCode)
-        /*Picasso.with(context).load(flag)
-            .placeholder(R.drawable.ic_placeholder)
-            .error(R.drawable.ic_placeholder_error)
-            .into(holder.flag)*/
         holder.flag.setImageResource(flag)
         holder.menu.setOnClickListener {
                 Timber.d("==q ${dataList[position].country}")
@@ -67,9 +63,6 @@ internal class CountryCasesListAdapter(
                     "")
                 context.startActivity(intent)
         }
-    }
-
-    fun initWorld() {
     }
 
     fun sort() {
@@ -94,6 +87,11 @@ internal class CountryCasesListAdapter(
 
     override fun getItemCount(): Int {
         return dataList.size
+    }
+    
+    fun clear() {
+        this.dataList = emptyList()
+        notifyDataSetChanged()
     }
 
 

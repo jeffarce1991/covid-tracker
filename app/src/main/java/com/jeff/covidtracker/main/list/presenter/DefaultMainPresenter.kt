@@ -11,6 +11,7 @@ import com.jeff.covidtracker.supplychain.country.list.SummaryLoader
 import com.jeff.covidtracker.supplychain.photo.PhotoLoader
 import com.jeff.covidtracker.webservices.dto.PhotoDto
 import com.jeff.covidtracker.utilities.rx.RxSchedulerUtils
+import com.jeff.covidtracker.webservices.exception.NoInternetException
 import io.reactivex.*
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
@@ -32,24 +33,66 @@ constructor(
 
 
     override fun loadCountryCases() {
-        summaryLoader.loadCountryCases()
+        summaryLoader.loadCountryCasesRemotely()
             .compose(schedulerUtils.forSingle())
             .subscribe(object : SingleObserver<List<Cases>>{
                 override fun onSuccess(t: List<Cases>) {
-                    Timber.d("==q getSummary() onSuccess $t")
+                    Timber.d("==q getSummary() onSuccess ${t.size}")
                     view.hideProgress()
-                    view.generateDataList(t)
 
+                    view.generateDataList(t)
+                    view.showLoadedRemotely()
                     dispose()
                 }
 
                 override fun onSubscribe(d: Disposable) {
-                    view.showProgressRemote()
+                    view.clearDataList()
+                    view.showProgress()
                     disposable = d
                 }
 
                 override fun onError(e: Throwable) {
                     Timber.d("==q getSummary() onError $e")
+
+                    if (e is NoInternetException) {
+                        view.showNoInternetError()
+                    } else {
+                        view.showError(e.message!!)
+                    }
+
+                    view.clearDataList()
+                    dispose()
+                    view.hideProgress()
+                }
+            })
+    }
+
+    override fun loadCountryCasesLocally() {
+        summaryLoader.loadCountryCasesLocally()
+            .compose(schedulerUtils.forSingle())
+            .subscribe(object : SingleObserver<List<Cases>>{
+                override fun onSuccess(t: List<Cases>) {
+                    Timber.d("==q getSummary() onSuccess ${t.size}")
+                    view.hideProgress()
+
+                    if (t.isEmpty()) {
+                        Timber.d("==q getSummary() isEmpty ${t.size}")
+                        view.showEmptyListError()
+                    } else {
+                        view.generateDataList(t)
+                        view.showLoadedLocally()
+                    }
+                    dispose()
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    view.showProgress()
+                    disposable = d
+                }
+
+                override fun onError(e: Throwable) {
+                    Timber.d("==q getSummary() onError $e")
+                    view.showError(e.message!!)
 
                     dispose()
                     view.hideProgress()

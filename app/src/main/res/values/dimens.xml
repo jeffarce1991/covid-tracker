@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="screen_margin_xxl">44dp</dimen>
     <dimen name="screen_margin_xl">32dp</dimen>
     <dimen name="screen_margin_large">24dp</dimen>
     <dimen name="screen_margin">16dp</dimen>

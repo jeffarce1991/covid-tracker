@@ -3,8 +3,6 @@ package com.jeff.covidtracker.main.list.view
 import android.app.ProgressDialog
 import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,25 +13,27 @@ import androidx.core.view.MenuItemCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blongho.country_data.World
+import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.adapter.CountryCasesListAdapter
-import com.jeff.covidtracker.android.base.extension.longToast
+import com.jeff.covidtracker.android.base.extension.hide
 import com.jeff.covidtracker.android.base.extension.shortToast
+import com.jeff.covidtracker.android.base.extension.show
 import com.jeff.covidtracker.database.local.Cases
 import com.jeff.covidtracker.database.local.Country
 import com.jeff.covidtracker.database.local.Photo
 import com.jeff.covidtracker.databinding.ActivityMainBinding
 import com.jeff.covidtracker.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 
 class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
-    private lateinit var adapter: CountryCasesListAdapter
+    private var adapter: CountryCasesListAdapter = CountryCasesListAdapter(this, emptyList())
     private lateinit var progressDialog: ProgressDialog
 
     lateinit var mainBinding : ActivityMainBinding
@@ -55,6 +55,7 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
         setContentView(R.layout.activity_main)
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setUpToolbarTitle()
+        setOnRefreshListener()
         mainPresenter.loadCountryCases()
     }
 
@@ -109,14 +110,25 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
         supportActionBar!!.title = "Select Country"
     }
 
+    private fun setOnRefreshListener() {
+        mainBinding.swipeRefreshLayout.setOnRefreshListener {
+            mainPresenter.loadCountryCases()
+        }
+    }
+
     //Method to generate List of data using RecyclerView with custom com.project.retrofit.adapter*//*
     override fun generateDataList(cases: List<Cases>) {
+        hideErrorImage()
         adapter = CountryCasesListAdapter(this, cases)
         val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this@MainActivity)
-        mainBinding.customRecyclerView.layoutManager = layoutManager
-        mainBinding.customRecyclerView.adapter = adapter
+        mainBinding.countryRecyclerView.layoutManager = layoutManager
+        mainBinding.countryRecyclerView.adapter = adapter
         adapter.sort()
         setSearchQueryListener(cases)
+    }
+
+    override fun clearDataList() {
+        adapter.clear()
     }
 
     private fun filter(text: String,
@@ -145,21 +157,56 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
     override fun createPresenter(): MainPresenter {
         return mainPresenter
     }
+    override fun showNoInternetError() {
+        Snackbar.make(mainBinding.coordLayout,
+            resources.getString(R.string.no_internet_connection),
+            Snackbar.LENGTH_LONG)
+            .setAction("Load cache") { presenter.loadCountryCasesLocally() }
+            .setActionTextColor(resources.getColor(R.color.green))
+            .show()
+
+        showErrorImage()
+    }
+    override fun showEmptyListError() {
+        Snackbar.make(mainBinding.coordLayout,
+            resources.getString(R.string.no_data_saved_locally),
+            Snackbar.LENGTH_LONG)
+            .show()
+
+        showErrorImage()
+    }
+
+    override fun showError(message: String) {
+        Snackbar.make(mainBinding.coordLayout,
+            message,
+            Snackbar.LENGTH_INDEFINITE)
+            .show()
+    }
+
+    override fun showLoadedLocally() {
+        //longToast(message)
+        Snackbar.make(mainBinding.coordLayout,
+            resources.getString(R.string.loaded_data_from_cache),
+            Snackbar.LENGTH_SHORT)
+            .show()
+    }
+
+    override fun showLoadedRemotely() {
+        //longToast(message)
+        Snackbar.make(mainBinding.coordLayout,
+            resources.getString(R.string.loaded_data_from_remote),
+            Snackbar.LENGTH_SHORT)
+            .show()
+    }
 
     override fun hideProgress() {
-        progressDialog.dismiss()
+        //mainBinding.progressBar.hide()
+        swipe_refresh_layout.isRefreshing = false
     }
 
-    override fun showLoadingDataFailed() {
-        longToast("Loading data failed")
-        /*invokeSimpleDialog("Project420",
-            "OK",
-            "List is empty or null.")*/
-        //TEST COMMIT
-    }
-
-    override fun showToast(message: String) {
-        longToast(message)
+    override fun showProgress() {
+        //mainBinding.progressBar.show()
+        swipe_refresh_layout.isRefreshing = true
     }
 
     override fun showProgressRemote() {
@@ -175,4 +222,14 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
             "Project420",
             "Loading data locally...")
     }
+
+    private fun hideErrorImage() {
+        mainBinding.errorImage.hide()
+        mainBinding.errorMessage.hide()
+    }
+    private fun showErrorImage() {
+        mainBinding.errorImage.show()
+        mainBinding.errorMessage.show()
+    }
 }
+

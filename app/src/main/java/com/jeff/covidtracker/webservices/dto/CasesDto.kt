@@ -4,6 +4,8 @@ import androidx.annotation.Nullable
 import com.google.gson.annotations.SerializedName
 
 data class CasesDto(
+
+
     @field:SerializedName("Country") var country: String,
     @field:SerializedName("CountryCode") var  countryCode: String,
     @Nullable
@@ -43,5 +45,7 @@ data class CasesDto(
     @Nullable
     @field:SerializedName("TotalRecovered") var totalRecovered: Int? = null
 
-)
+) {
+    constructor(): this("", "", "", null, null, null)
+}
 
