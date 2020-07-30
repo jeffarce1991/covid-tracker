@@ -24,6 +24,10 @@ class MainActivityTest {
     @Rule @JvmField
     var activityRule = ActivityTestRule(MainActivity::class.java)
 
+    private fun sleep() {
+        Thread.sleep(3000)
+    }
+
     @Test
     fun brazil() {
         onView(withId(R.id.country_recycler_view)).perform(
@@ -42,6 +46,7 @@ class MainActivityTest {
 
     @Test
     fun countryListIsNotEmpty() {
+        sleep()
         onView(withId(R.id.country_recycler_view)).check(
             RecyclerViewItemCountAssertion.withItemCount(greaterThan(0) as Matcher<Int?>?)
         )
