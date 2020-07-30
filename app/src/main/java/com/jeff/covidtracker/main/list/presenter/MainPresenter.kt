@@ -6,4 +6,5 @@ import com.jeff.covidtracker.main.list.view.MainView
 interface MainPresenter: MvpPresenter<MainView> {
     fun getCountries()
     fun loadCountryCases()
+    fun loadCountryCasesLocally()
 }
