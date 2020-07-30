@@ -15,8 +15,10 @@ data class GlobalCases (
     @ColumnInfo(name = "total_cases")
     var totalCases: TotalCases? = null
 ) {
+    constructor(): this("", null, null)
 
     companion object {
+
 
         const val COLUMN_DEAL_ID = "global_cases_id"
         const val COLUMN_ID = "id"

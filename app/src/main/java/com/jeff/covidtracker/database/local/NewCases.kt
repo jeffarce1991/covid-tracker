@@ -5,4 +5,4 @@ data class NewCases(
     var newConfirmed: Int? = null,
     var newDeaths: Int? = null,
     var newRecovered: Int? = null
-)
+) {}
