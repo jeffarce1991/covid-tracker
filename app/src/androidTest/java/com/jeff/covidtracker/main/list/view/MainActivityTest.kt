@@ -1,11 +1,8 @@
 package com.jeff.covidtracker.main.list.view
 
-import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.NoMatchingViewException
-import androidx.test.espresso.ViewAssertion
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -16,10 +13,8 @@ import androidx.test.rule.ActivityTestRule
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.main.RecyclerViewItemCountAssertion
 import org.hamcrest.CoreMatchers
-import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.greaterThan
-import org.junit.Assert.assertThat
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -31,7 +26,7 @@ class MainActivityTest {
 
     @Test
     fun brazil() {
-        onView(withId(R.id.customRecyclerView)).perform(
+        onView(withId(R.id.country_recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 1, click()));
 
@@ -47,7 +42,7 @@ class MainActivityTest {
 
     @Test
     fun countryListIsNotEmpty() {
-        onView(withId(R.id.customRecyclerView)).check(
+        onView(withId(R.id.country_recycler_view)).check(
             RecyclerViewItemCountAssertion.withItemCount(greaterThan(0) as Matcher<Int?>?)
         )
     }

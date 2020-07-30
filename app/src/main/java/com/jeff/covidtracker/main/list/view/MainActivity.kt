@@ -3,28 +3,21 @@ package com.jeff.covidtracker.main.list.view
 import android.app.ProgressDialog
 import android.app.ProgressDialog.show
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuItemCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blongho.country_data.World
 import com.google.android.material.snackbar.Snackbar
 import com.hannesdorfmann.mosby.mvp.MvpActivity
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.adapter.CountryCasesListAdapter
 import com.jeff.covidtracker.android.base.extension.hide
-import com.jeff.covidtracker.android.base.extension.longToast
 import com.jeff.covidtracker.android.base.extension.shortToast
 import com.jeff.covidtracker.android.base.extension.show
 import com.jeff.covidtracker.database.local.Cases
@@ -208,12 +201,12 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
 
     override fun hideProgress() {
         //mainBinding.progressBar.hide()
-        swipeRefreshLayout.isRefreshing = false
+        swipe_refresh_layout.isRefreshing = false
     }
 
     override fun showProgress() {
         //mainBinding.progressBar.show()
-        swipeRefreshLayout.isRefreshing = true
+        swipe_refresh_layout.isRefreshing = true
     }
 
     override fun showProgressRemote() {
