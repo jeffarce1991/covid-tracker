@@ -11,5 +11,11 @@
     <string name="about">About</string>
     <string name="exit">Exit</string>
     <string name="todo">TODO…</string>
+    <string name="no_internet_connection">No Internet connection</string>
     <string name="missing_country_name">Missing Country Name</string>
+    <string name="no_data_saved_locally">No existing data saved from cache.</string>
+    <string name="load_data_from_cache">Load data from cache?</string>
+    <string name="something_went_wrong">Oops! \nSomething went wrong.</string>
+    <string name="loaded_data_from_cache">Loaded data from cache.</string>
+    <string name="loaded_data_from_remote">Loaded data from remote.</string>
 </resources>

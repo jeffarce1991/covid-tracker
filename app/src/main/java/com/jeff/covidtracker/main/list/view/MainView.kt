@@ -5,10 +5,15 @@ import com.jeff.covidtracker.database.local.Cases
 
 interface MainView : MvpView {
      fun hideProgress()
+     fun showProgress()
      fun showProgressRemote()
      fun showProgressLocal()
 
-     fun showLoadingDataFailed()
-     fun showToast(message: String)
+     fun showEmptyListError()
+     fun showNoInternetError()
+     fun showError(message: String)
+     fun showLoadedLocally()
+     fun showLoadedRemotely()
      fun generateDataList(cases: List<Cases>)
+     fun clearDataList()
 }

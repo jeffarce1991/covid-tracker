@@ -75,3 +75,11 @@ fun String.Companion.substringWithDots(s: String, maxLength: Int) : String {
 
 @OptIn(ExperimentalStdlibApi::class)
 fun String.toTitleCase(): String = this.capitalize(Locale.ROOT)
+
+fun View.hide() {
+    this.visibility = View.GONE
+}
+
+fun View.show() {
+    this.visibility = View.VISIBLE
+}
