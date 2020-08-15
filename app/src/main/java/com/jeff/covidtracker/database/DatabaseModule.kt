@@ -2,6 +2,7 @@ package com.jeff.covidtracker.database
 
 import android.app.Application
 import androidx.room.Room
+import com.jeff.covidtracker.MyApplication
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.database.room.AppDatabase
 import com.jeff.covidtracker.database.room.dao.CasesDao
@@ -17,10 +18,10 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(application: Application): AppDatabase {
-        return Room.databaseBuilder(application,
+    fun provideDatabase(myApplication: MyApplication): AppDatabase {
+        return Room.databaseBuilder(myApplication,
             AppDatabase::class.java,
-            application.getString(R.string.db_name))
+            myApplication.getString(R.string.db_name))
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -33,13 +34,13 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun providCountryDao(appDatabase: AppDatabase): CountryDao {
+    fun provideCountryDao(appDatabase: AppDatabase): CountryDao {
         return appDatabase.countryDao()
     }
 
     @Provides
     @Singleton
-    fun providCasesDao(appDatabase: AppDatabase): CasesDao {
+    fun provideCasesDao(appDatabase: AppDatabase): CasesDao {
         return appDatabase.casesDao()
     }
 }

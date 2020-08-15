@@ -6,12 +6,6 @@ import dagger.Module
 
 @Module
 interface WebServiceUseCaseModule {
-
-    @Binds
-    fun bindPhotoRemoteLoader(
-            defaultPhotoRemoteLoader: DefaultPhotoRemoteLoader):
-            PhotoRemoteLoader
-
     @Binds
     fun bindCountryRemoteLoader(
             defaultCountryRemoteLoader: DefaultCountryRemoteLoader
