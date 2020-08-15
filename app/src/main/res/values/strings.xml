@@ -18,5 +18,4 @@
     <string name="something_went_wrong">Oops! \nSomething went wrong.</string>
     <string name="loaded_data_from_cache">Loaded data from cache.</string>
     <string name="loaded_data_from_remote">Loaded data from remote.</string>
-    <string name="session_timeout_exception">Server Timeout</string>
 </resources>

@@ -38,9 +38,12 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
 
     lateinit var mainBinding : ActivityMainBinding
 
+    lateinit var photos : List<Photo>
+
     lateinit var countries : List<Country>
 
     private lateinit var searchView: SearchView
+
 
     @Inject
     internal lateinit var mainPresenter: MainPresenter
@@ -164,18 +167,6 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
 
         showErrorImage()
     }
-
-    override fun showSessionTimeoutError() {
-        Snackbar.make(mainBinding.coordLayout,
-            resources.getString(R.string.session_timeout_exception),
-            Snackbar.LENGTH_LONG)
-            .setAction("Load cache") { presenter.loadCountryCasesLocally() }
-            .setActionTextColor(resources.getColor(R.color.green))
-            .show()
-
-        showErrorImage()
-    }
-
     override fun showEmptyListError() {
         Snackbar.make(mainBinding.coordLayout,
             resources.getString(R.string.no_data_saved_locally),
@@ -190,8 +181,6 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
             message,
             Snackbar.LENGTH_INDEFINITE)
             .show()
-
-        showErrorImage()
     }
 
     override fun showLoadedLocally() {

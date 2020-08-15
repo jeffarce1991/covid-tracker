@@ -8,19 +8,20 @@ import com.jeff.covidtracker.webservices.internet.RxInternet
 import com.jeff.covidtracker.main.list.view.MainView
 import com.jeff.covidtracker.supplychain.country.list.CountryLoader
 import com.jeff.covidtracker.supplychain.country.list.SummaryLoader
+import com.jeff.covidtracker.supplychain.photo.PhotoLoader
 import com.jeff.covidtracker.webservices.dto.PhotoDto
 import com.jeff.covidtracker.utilities.rx.RxSchedulerUtils
 import com.jeff.covidtracker.webservices.exception.NoInternetException
 import io.reactivex.*
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
-import java.net.SocketTimeoutException
 import javax.inject.Inject
 
 class DefaultMainPresenter @Inject
 constructor(
     private val internet: RxInternet,
     private val schedulerUtils: RxSchedulerUtils,
+    private val loader: PhotoLoader,
     private val countryLoader: CountryLoader,
     private val summaryLoader: SummaryLoader
 ) : MvpBasePresenter<MainView>(),
@@ -53,16 +54,10 @@ constructor(
                 override fun onError(e: Throwable) {
                     Timber.d("==q getSummary() onError $e")
 
-                    when (e) {
-                        is NoInternetException -> {
-                            view.showNoInternetError()
-                        }
-                        is SocketTimeoutException -> {
-                            view.showNoInternetError()
-                        }
-                        else -> {
-                            view.showError(e.message!!)
-                        }
+                    if (e is NoInternetException) {
+                        view.showNoInternetError()
+                    } else {
+                        view.showError(e.message!!)
                     }
 
                     view.clearDataList()

@@ -21,7 +21,7 @@ data class Cases (
     @ColumnInfo(name = "total_cases")
     var totalCases: TotalCases? = null
 ) {
-    constructor(): this("PH", "Philippines", "now()", CountryDetails(), NewCases(), TotalCases(999,1,998))
+    constructor(): this("", "", "", null, null, null)
 
     data class CountryDetails(
         var province: String? = null,

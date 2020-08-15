@@ -11,7 +11,6 @@ interface MainView : MvpView {
 
      fun showEmptyListError()
      fun showNoInternetError()
-     fun showSessionTimeoutError()
      fun showError(message: String)
      fun showLoadedLocally()
      fun showLoadedRemotely()

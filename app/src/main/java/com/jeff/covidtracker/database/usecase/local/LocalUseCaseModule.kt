@@ -7,6 +7,8 @@ import dagger.Module
 
 @Module
 interface LocalUseCaseModule {
+    @Binds
+    fun bindPhotoLocalLoader(implementation: DefaultPhotoLocalLoader): PhotoLocalLoader
 
     @Binds
     fun bindPhotoLocalSaver(implementation: DefaultPhotoLocalSaver): PhotoLocalSaver

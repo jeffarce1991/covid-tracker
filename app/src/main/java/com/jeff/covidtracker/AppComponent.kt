@@ -1,5 +1,6 @@
 package com.jeff.covidtracker
 
+import android.app.Application
 import com.jeff.covidtracker.database.DatabaseModule
 import com.jeff.covidtracker.webservices.internet.RxInternetModule
 import com.jeff.covidtracker.main.MainModule
@@ -29,7 +30,7 @@ interface AppComponent {
     interface Builder {
 
         @BindsInstance
-        fun application(myApplication: MyApplication): Builder
+        fun application(application: Application): Builder
 
         fun build(): AppComponent
     }

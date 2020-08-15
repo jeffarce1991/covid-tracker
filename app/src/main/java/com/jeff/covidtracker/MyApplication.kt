@@ -4,15 +4,12 @@ import android.app.Activity
 import android.app.Application
 import android.app.Service
 import androidx.fragment.app.Fragment
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
-import dagger.android.HasServiceInjector
+import dagger.android.*
 import dagger.android.support.HasSupportFragmentInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-open class MyApplication : Application(), HasActivityInjector, HasServiceInjector,
+class MyApplication : Application(), HasActivityInjector, HasServiceInjector,
     HasSupportFragmentInjector {
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
@@ -23,12 +20,6 @@ open class MyApplication : Application(), HasActivityInjector, HasServiceInjecto
     @Inject
     lateinit var dispatchingSupportFragmentInjector: DispatchingAndroidInjector<Fragment>
 
-
-    /*open val component: AppComponent by lazy {
-        DaggerAppComponent.builder()
-            .application(this)
-            .build()
-    }*/
     override fun onCreate() {
         super.onCreate()
 
@@ -38,13 +29,11 @@ open class MyApplication : Application(), HasActivityInjector, HasServiceInjecto
             initializeTimber()
         }
 
-        initializeComponent()
+        DaggerAppComponent.builder()
+            .application(this)
+            .build()
             .inject(this)
 
-    }
-
-    open fun initializeComponent(): AppComponent {
-        return DaggerAppComponent.builder().application(this).build()
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {
