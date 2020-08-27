@@ -30,6 +30,7 @@ class MainActivityTest {
 
     @Test
     fun brazil() {
+        sleep()
         onView(withId(R.id.country_recycler_view)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 1, click()));
