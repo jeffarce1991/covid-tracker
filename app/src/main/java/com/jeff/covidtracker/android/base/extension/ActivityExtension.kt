@@ -76,10 +76,22 @@ fun String.Companion.substringWithDots(s: String, maxLength: Int) : String {
 @OptIn(ExperimentalStdlibApi::class)
 fun String.toTitleCase(): String = this.capitalize(Locale.ROOT)
 
+fun View.visibility(isVisible: Boolean) {
+    if (isVisible){
+        this.visibility = View.VISIBLE
+    } else {
+        this.visibility = View.GONE
+    }
+}
+
 fun View.hide() {
     this.visibility = View.GONE
 }
 
 fun View.show() {
     this.visibility = View.VISIBLE
+}
+
+fun String.Companion.numbersWithComma(i: Int): String {
+    return this.format("%,d", i)
 }

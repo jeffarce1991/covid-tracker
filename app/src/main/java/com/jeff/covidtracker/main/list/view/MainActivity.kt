@@ -2,6 +2,8 @@ package com.jeff.covidtracker.main.list.view
 
 import android.app.ProgressDialog
 import android.app.ProgressDialog.show
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -24,6 +26,7 @@ import com.jeff.covidtracker.database.local.Cases
 import com.jeff.covidtracker.database.local.Country
 import com.jeff.covidtracker.database.local.Photo
 import com.jeff.covidtracker.databinding.ActivityMainBinding
+import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
 import com.jeff.covidtracker.main.list.presenter.MainPresenter
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
@@ -43,7 +46,11 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
     lateinit var countries : List<Country>
 
     private lateinit var searchView: SearchView
-
+    companion object {
+        fun getStartIntent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
+        }
+    }
 
     @Inject
     internal lateinit var mainPresenter: MainPresenter
@@ -154,9 +161,8 @@ class MainActivity : MvpActivity<MainView, MainPresenter>(), MainView {
 
 
 
-    override fun createPresenter(): MainPresenter {
-        return mainPresenter
-    }
+    override fun createPresenter(): MainPresenter = mainPresenter
+
     override fun showNoInternetError() {
         Snackbar.make(mainBinding.coordLayout,
             resources.getString(R.string.no_internet_connection),
