@@ -7,11 +7,17 @@ import com.jeff.covidtracker.main.detail.presenter.CountryDetailPresenterModule
 import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
 import com.jeff.covidtracker.main.list.presenter.MainPresenterModule
 import com.jeff.covidtracker.main.list.view.MainActivity
+import com.jeff.covidtracker.main.splash.presenter.SplashPresenterModule
+import com.jeff.covidtracker.main.splash.view.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 interface MainModule {
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SplashPresenterModule::class])
+    fun splashActivity(): SplashActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainPresenterModule::class])
