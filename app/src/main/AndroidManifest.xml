@@ -16,6 +16,7 @@
         <activity android:name=".main.detail.view.CountryDetailActivity" />
         <activity
             android:name=".main.list.view.MainActivity">
+        <activity android:name=".main.dashboard.view.DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

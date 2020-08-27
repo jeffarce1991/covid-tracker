@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main.dashboard.view.DashboardActivity">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                app:title="Dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/ToolbarStyle"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:id="@+id/my_country_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/screen_margin"
+            android:layout_marginStart="@dimen/screen_margin_xs"
+            android:text="My Country"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+            <androidx.cardview.widget.CardView
+                android:visibility="visible"
+                android:id="@+id/select_my_country_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/my_country_label"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <!-- My Country Content View -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/screen_margin">
+
+                    <TextView
+                        android:id="@+id/select_my_country"
+                        style="@style/TextAppearance.MaterialComponents.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/screen_margin_xs"
+                        android:layout_marginTop="@dimen/screen_margin"
+                        android:text="Click to select your Country"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.472"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:visibility="visible"
+                android:id="@+id/my_country_card_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/my_country_label"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <!-- My Country Content View -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/screen_margin">
+
+                    <TextView
+                        android:id="@+id/my_country"
+                        style="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/screen_margin"
+                        android:text="-"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/edit_my_country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_baseline_edit_24"
+                        android:layout_marginStart="@dimen/screen_margin"
+                        app:layout_constraintStart_toEndOf="@id/my_country"
+                        app:layout_constraintTop_toTopOf="@id/my_country"
+                        app:layout_constraintBottom_toBottomOf="@id/my_country"/>
+
+                    <TextView
+                        android:id="@+id/confirmedCasesLabel"
+                        style="@style/TextAppearance.MaterialComponents.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/screen_margin_large"
+                        android:layout_marginTop="@dimen/screen_margin"
+                        android:labelFor="@id/confirmedCases"
+                        android:text="Total Cases"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/my_country" />
+
+                    <TextView
+                        android:id="@+id/confirmedCases"
+                        style="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@color/blue"
+                        app:layout_constraintStart_toStartOf="@id/confirmedCasesLabel"
+                        app:layout_constraintTop_toBottomOf="@id/confirmedCasesLabel" />
+
+                    <TextView
+                        android:id="@+id/newConfirmedCasesLabel"
+                        style="@style/TextAppearance.MaterialComponents.Caption"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/screen_margin"
+                        android:layout_marginEnd="@dimen/screen_margin"
+                        android:labelFor="@id/confirmedCases"
+                        android:text="New Cases"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/my_country" />
+
+                    <TextView
+                        android:id="@+id/newConfirmedCases"
+                        style="@style/TextAppearance.MaterialComponents.Headline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textColor="@color/blue"
+                        app:layout_constraintStart_toStartOf="@id/newConfirmedCasesLabel"
+                        app:layout_constraintTop_toBottomOf="@id/newConfirmedCasesLabel" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/see_all_cases"
+        style="@style/TextAppearance.MaterialComponents.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/screen_margin"
+        android:layout_gravity="center"
+        android:text="Navigate to Country Cases List"
+        app:layout_constraintTop_toBottomOf="@id/my_country_card_view" />
+
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

@@ -1,6 +1,8 @@
 package com.jeff.covidtracker.main
 
 import com.jeff.covidtracker.ActivityScope
+import com.jeff.covidtracker.main.dashboard.presenter.DashboardPresenterModule
+import com.jeff.covidtracker.main.dashboard.view.DashboardActivity
 import com.jeff.covidtracker.main.detail.presenter.CountryDetailPresenterModule
 import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
 import com.jeff.covidtracker.main.list.presenter.MainPresenterModule
@@ -18,4 +20,8 @@ interface MainModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [CountryDetailPresenterModule::class])
     fun countryDetailActivity(): CountryDetailActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [DashboardPresenterModule::class])
+    fun dashboardActivity(): DashboardActivity
 }
