@@ -12,11 +12,25 @@ import javax.inject.Inject
 
 class DefaultCasesLoader @Inject
 constructor(
-    private val localLoader: CasesLocalLoader
+    private val localLoader: CasesLocalLoader,
+    private val remoteLoader: CasesRemoteLoader,
+    private val internet: RxInternet
 ): CasesLoader{
 
     override fun loadByCountryCode(countryCode: String): Single<Cases> {
         return localLoader.loadByCountryCode(countryCode)
+    }
+
+    override fun loadByCountryCodeRemotely(iso2: String): Single<Cases> {
+        return internet.isConnected()
+            .andThen(remoteLoader.loadCasesByIso2(iso2))
+            .flatMapObservable { list -> Observable.fromIterable(list) }
+            .flatMap(CasesDtoToCasesMapper())
+            .toList()
+            .flatMap {
+                Timber.d("==q Countries loaded remotely. ${it.size}")
+                Single.just(it.last())
+            }
     }
 
 }
