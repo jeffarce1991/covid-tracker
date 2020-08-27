@@ -36,41 +36,6 @@ constructor(
             .subscribe()
     }
 
-    fun loadSummary() {
-        summaryLoader.loadCountryCasesRemotely()
-            .compose(schedulerUtils.forSingle())
-            .subscribe(object : SingleObserver<List<Cases>> {
-                override fun onSuccess(t: List<Cases>) {
-                    Timber.d("==q getSummary() onSuccess ${t.size}")
-                    //view.hideProgress()
-
-                    //view.generateDataList(t)
-                    //view.showLoadedRemotely()
-                    dispose()
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                    //view.clearDataList()
-                    //view.showProgress()
-                    disposable = d
-                }
-
-                override fun onError(e: Throwable) {
-                    Timber.d("==q getSummary() onError $e")
-
-                    if (e is NoInternetException) {
-                        //view.showNoInternetError()
-                    } else {
-                        //view.showError(e.message!!)
-                    }
-
-                    //view.clearDataList()
-                    dispose()
-                    //view.hideProgress()
-                }
-            })
-    }
-
     override fun attachView(view: SplashView) {
         super.attachView(view)
         this.view = view
