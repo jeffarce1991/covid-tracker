@@ -9,6 +9,7 @@ import com.jeff.covidtracker.supplychain.country.list.SummaryLoader
 import com.jeff.covidtracker.utilities.rx.RxSchedulerUtils
 import com.jeff.covidtracker.webservices.exception.NoInternetException
 import io.reactivex.Completable
+import io.reactivex.CompletableObserver
 import io.reactivex.SingleObserver
 import io.reactivex.disposables.Disposable
 import timber.log.Timber
@@ -26,15 +27,27 @@ constructor(
     lateinit var disposable: Disposable
 
     override fun decideWhichScreenToRedirectTo() {
-        disposable = Completable.complete()
-            //.delay(2, TimeUnit.SECONDS)
-            .andThen(summaryLoader.loadCountryCasesRemotelyCompletable())
+        summaryLoader.loadCountryCasesRemotelyCompletable()
             .andThen { view.navigateToDashboardScreen() }
             //.onErrorResumeNext { redirectToViewingPrivacyPolicy() }
             //.onErrorResumeNext { redirectToFingerprintVerification() }
             .compose(schedulerUtils.forCompletable())
-            .subscribe()
+            .subscribe(object : CompletableObserver{
+                override fun onComplete() {
+                    dispose()
+                }
+
+                override fun onSubscribe(d: Disposable) {
+                    disposable = d
+                }
+
+                override fun onError(e: Throwable) {
+                    view.showError(e.message!!)
+                    dispose()
+                }
+            })
     }
+
 
     override fun attachView(view: SplashView) {
         super.attachView(view)
