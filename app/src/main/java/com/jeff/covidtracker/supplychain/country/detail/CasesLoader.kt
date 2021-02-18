@@ -5,4 +5,5 @@ import io.reactivex.Single
 
 interface CasesLoader {
         fun loadByCountryCode(countryCode: String): Single<Cases>
+        fun loadByCountryCodeRemotely(countryCode: String): Single<Cases>
 }

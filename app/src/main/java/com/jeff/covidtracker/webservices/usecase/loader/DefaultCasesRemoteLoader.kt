@@ -19,4 +19,12 @@ constructor(private val apiFactory: ApiFactory): CasesRemoteLoader {
                 Single.just(response.body()!!) }
     }
 
+    override fun loadCasesByIso2(iso2: String): Single<List<CasesDto>> {
+        return apiFactory.create(Covid19Api::class.java)
+            .flatMap { it.loadCountryCasesByIso2(iso2) }
+            .compose(ResponseCodeNot200SingleTransformer())
+            .compose(NullResultTransformer())
+            .flatMap { response ->
+                Single.just(response.body()!!) }
+    }
 }

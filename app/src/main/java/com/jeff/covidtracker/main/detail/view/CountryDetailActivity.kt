@@ -13,7 +13,7 @@ import com.jeff.covidtracker.databinding.ActivityCountryDetailBinding
 import com.jeff.covidtracker.main.detail.presenter.DefaultCountryDetailPresenter
 import com.jeff.covidtracker.utilities.extensions.toDisplay
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.item_country.*
+import kotlinx.android.synthetic.main.item_country_list.*
 import javax.inject.Inject
 
 class CountryDetailActivity : MvpActivity<CountryDetailView, DefaultCountryDetailPresenter>(),

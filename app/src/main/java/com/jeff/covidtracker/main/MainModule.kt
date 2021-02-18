@@ -1,15 +1,23 @@
 package com.jeff.covidtracker.main
 
 import com.jeff.covidtracker.ActivityScope
+import com.jeff.covidtracker.main.dashboard.presenter.DashboardPresenterModule
+import com.jeff.covidtracker.main.dashboard.view.DashboardActivity
 import com.jeff.covidtracker.main.detail.presenter.CountryDetailPresenterModule
 import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
 import com.jeff.covidtracker.main.list.presenter.MainPresenterModule
 import com.jeff.covidtracker.main.list.view.MainActivity
+import com.jeff.covidtracker.main.splash.presenter.SplashPresenterModule
+import com.jeff.covidtracker.main.splash.view.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 interface MainModule {
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [SplashPresenterModule::class])
+    fun splashActivity(): SplashActivity
 
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainPresenterModule::class])
@@ -18,4 +26,8 @@ interface MainModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [CountryDetailPresenterModule::class])
     fun countryDetailActivity(): CountryDetailActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [DashboardPresenterModule::class])
+    fun dashboardActivity(): DashboardActivity
 }

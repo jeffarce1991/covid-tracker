@@ -13,6 +13,7 @@ import com.jeff.covidtracker.webservices.dto.GlobalCasesDto
 import com.jeff.covidtracker.webservices.dto.SummaryDto
 import com.jeff.covidtracker.webservices.internet.RxInternet
 import com.jeff.covidtracker.webservices.usecase.loader.SummaryRemoteLoader
+import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import timber.log.Timber
@@ -42,6 +43,16 @@ constructor(
                 Timber.d("==q Countries loaded remotely. ${it.size}")
                 Single.just(it)
             }
+    }
+
+    override fun loadCountryCasesRemotelyCompletable(): Completable {
+        return internet.isConnected()
+            .andThen(remoteLoader.loadSummary())
+            .flatMapObservable { list -> Observable.fromIterable(list.countryCases) }
+            .flatMap(CasesDtoToCasesMapper())
+            .toList()
+            .flatMap { Single.fromObservable(countryCasesLocalSaver.saveAll(it)) }
+            .flatMapCompletable { Completable.complete() }
     }
 
     override fun loadCountryCasesLocally() : Single<List<Cases>> {

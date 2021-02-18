@@ -15,7 +15,7 @@ import com.jakewharton.picasso.OkHttp3Downloader
 import com.jeff.covidtracker.R
 import com.jeff.covidtracker.android.base.extension.substringWithDots
 import com.jeff.covidtracker.database.local.Cases
-import com.jeff.covidtracker.databinding.ItemCountryBinding
+import com.jeff.covidtracker.databinding.ItemCountryListBinding
 import com.jeff.covidtracker.main.detail.view.CountryDetailActivity
 import com.squareup.picasso.Picasso
 import timber.log.Timber
@@ -28,7 +28,7 @@ internal class CountryCasesListAdapter(
 ) : RecyclerView.Adapter<CountryCasesListAdapter.CountryCasesListViewHolder>() {
 
 
-    internal inner class CountryCasesListViewHolder(binding: ItemCountryBinding) :
+    internal inner class CountryCasesListViewHolder(binding: ItemCountryListBinding) :
         ViewHolder(binding.root) {
         var txtTitle: TextView = binding.country
         var confirmedCases: TextView = binding.confirmedCases
@@ -38,8 +38,8 @@ internal class CountryCasesListAdapter(
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CountryCasesListViewHolder {
-        val binding = DataBindingUtil.inflate<ItemCountryBinding>(LayoutInflater.from(p0.context),
-            R.layout.item_country,
+        val binding = DataBindingUtil.inflate<ItemCountryListBinding>(LayoutInflater.from(p0.context),
+            R.layout.item_country_list,
             p0,
             false)
         sort()
